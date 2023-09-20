@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class usaCampeonato{
     public static void main(String[] args){
         Campeonato camp = new Campeonato();
-        Scanner teclado = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         int opcao;
         do{
             System.out.println("..:: Menu Interativo ::..");
@@ -15,8 +15,7 @@ public class usaCampeonato{
             System.out.println("6 -> Ler Campeonato de arquivo");
             System.out.println("7 -> Sair");
 
-            opcao = teclado.nextInt();
-            teclado.nextInt();
+            opcao = scanner.nextInt();
 
             switch(opcao){
                 case 1:
@@ -37,6 +36,6 @@ public class usaCampeonato{
             }
 
         }while(opcao != 7);
-        teclado.close();
+        scanner.close();
     }
 }
