@@ -5,7 +5,14 @@ public class JogoGeneral {
     public void rolarDados(){
         for(int i=0; i<5; i++){
             dados[i].roll();
+            System.out.print(dados[i].getSideUp());
+            if(i != 4)
+                System.out.print("-");
         }
+    }
+    
+    public int getPontuacao(int jogada){
+        return jogadas[jogada];
     }
 
     // Funcao que valida se a jogada e possivel e calcula os pontos marcados
