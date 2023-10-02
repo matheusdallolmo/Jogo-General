@@ -30,6 +30,11 @@ public class Jogador {
         return tipoJogador;
     }
 
+    // Funcao que retorna a jogada
+    public int getJogada(int i){
+        return jogo.getJogada(i);
+    }
+
     // Funcao que atualiza as informacoes do jogador
     public void atualizaJogador(String nome, String tipoJogador){
         this.nome = nome;
@@ -53,8 +58,8 @@ public class Jogador {
 
     // Funcao que permite que o jogador escolha qual jogada ele deseja usar
     public void escolherJogada(){
-        Scanner scanner = new Scanner(System.in);
-        int aux, escolha, pontos;
+        Scanner sc = new Scanner(System.in);
+        int aux,  pontos;
         if(tipoJogador == "H"){// Separa o jogador humano da maquina por conta que o humano escolhe e a maquina nao
             System.out.println("\n-> "+nome+", para qual jogada deseja marcar [1 - 13]?");
             System.out.println("1 2 3 4 5 6 7(T) 8(Q) 9(F) 10(S+) 11(S-) 12(G) 13(X)\n");
@@ -65,13 +70,15 @@ public class Jogador {
                 else
                     System.out.print("- ");
             }
-            escolha = scanner.nextInt();
+            System.out.print("\nOpcao: ");
+            
+            int escolha = sc.nextInt();
             pontos = jogo.validarJogada(escolha);
 
             if(pontos == 0)
                 System.out.println("Você zerou a jogada!!");
             else
-                System.out.println("Você fez "+pontos+" na jogada "+escolha);
+                System.out.println("Você fez "+pontos+" na jogada "+escolha + "\n");
                 jogo.pontuarJogada(escolha, pontos);
         };
         if(tipoJogador == "M"){// Funcao que calcula a melhor jogada para a maquina
@@ -85,6 +92,5 @@ public class Jogador {
                     System.out.print("- ");
             }
         };
-        scanner.close();
     }
 }
