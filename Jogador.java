@@ -35,6 +35,10 @@ public class Jogador {
         return jogo.getJogada(i);
     }
 
+    public int getTotal(int i){
+        return jogo.getTotal(i);
+    }
+
     // Funcao que atualiza as informacoes do jogador
     public void atualizaJogador(String nome, String tipoJogador){
         this.nome = nome;
@@ -66,14 +70,23 @@ public class Jogador {
             for(int i = 0; i < 13; i++){// For para imprimir todos os resultados que o jogador ja possui
                 aux = jogo.getPontuacao(i);
                 if(aux >= 0)
-                    System.out.print(aux );
+                    System.out.print(aux + "    ");
                 else
-                    System.out.print("- ");
+                    System.out.print("   -   ");
             }
             System.out.print("\nOpcao: ");
             
             int escolha = sc.nextInt();
-            pontos = jogo.validarJogada(escolha);
+            if(jogo.getJogada(escolha) == -1)
+                pontos = jogo.validarJogada(escolha);
+            else{
+                while(jogo.getJogada(escolha) != -1){
+                    System.out.println("Jogada invalida, jogue novamente!");
+
+                    escolha = sc.nextInt();
+                }
+                pontos = jogo.validarJogada(escolha);
+            }
 
             if(pontos == 0)
                 System.out.println("Você zerou a jogada!!");

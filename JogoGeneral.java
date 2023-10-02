@@ -22,6 +22,17 @@ public class JogoGeneral {
         return jogadas[jogada];
     }
 
+    public int getJogada(int i){
+        return jogadas[i-1];
+    }
+
+    public int getTotal(int i){
+        int soma = 0;
+        for(i=0; i<13; i++)
+            soma += jogadas[i];
+
+        return soma;
+    }
     // Funcao que valida se a jogada e possivel e calcula os pontos marcados
     // Retorna 0 se a jogada nao for possivel ou os pontos marcados se ela for possivel
     public int validarJogada(int jogada){
@@ -125,11 +136,12 @@ public class JogoGeneral {
         //Verifica e calcula os pontos para Sequencia Alta (S+)
         else if (jogada == 10){
             for(i = 0; i<5; i++){
+                if(dados[i].getSideUp() == 1) //na seq. baixa nao pode haver 1, portanto, verifica
+                        return 0;
                 for(int j=0; j<5; j++){
-                    if(dados[j].getSideUp() == 1) //na seq. baixa nao pode haver 1, portanto, verifica
-                        return 0;
-                    if(dados[i].getSideUp() == dados[j].getSideUp()) //em ambas as sequencias nao pode haver numeros iguais
-                        return 0;
+                    if(i != j)
+                        if(dados[i].getSideUp() == dados[j].getSideUp()) //em ambas as sequencias nao pode haver numeros iguais
+                            return 0;
                 }
             }
             return 30;
@@ -137,12 +149,13 @@ public class JogoGeneral {
 
         //Verifica e calcula os pontos para Sequencia Baixa (S-)
         else if (jogada == 11){
-            for(i = 0; i<5; i++){
+            for(i = 0; i<5; i++){ 
+                if(dados[i].getSideUp() == 6)   //na seq. baixa nao pode haver 6, portanto, verifica
+                        return 0;
                 for(int j=0; j<5; j++){
-                    if(dados[j].getSideUp() == 6)   //na seq. baixa nao pode haver 6, portanto, verifica
-                        return 0;
-                    if(dados[i].getSideUp() == dados[j].getSideUp()) //em ambas as sequencias nao pode haver numeros iguais
-                        return 0;
+                    if(i != j)
+                        if(dados[i].getSideUp() == dados[j].getSideUp()) //em ambas as sequencias nao pode haver numeros iguais
+                            return 0;
                 }
             }
             
