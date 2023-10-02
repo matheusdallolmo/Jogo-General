@@ -1,6 +1,13 @@
 public class JogoGeneral {
     private Dado[] dados = new Dado[5];
-    private int[] jogadas = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}; 
+    private int[] jogadas = new int[13]; 
+
+    public JogoGeneral(){
+        for(int i = 0; i < 5; i++)
+            dados[i] = new Dado();
+        for(int i = 0; i < 13; i++)
+            jogadas[i] = -1;   
+    }
 
     public void rolarDados(){
         for(int i=0; i<5; i++){

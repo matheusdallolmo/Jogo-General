@@ -6,7 +6,7 @@ public class usaCampeonato{
         Scanner scanner = new Scanner(System.in);
         int opcao;
         do{
-            System.out.println("..:: Menu Interativo ::..");
+            System.out.println("\n..:: Menu Interativo ::..");
             System.out.println("1 -> Incluir Jogador");
             System.out.println("2 -> Remover Jogador");
             System.out.println("3 -> Iniciar Campeonato");
@@ -25,6 +25,7 @@ public class usaCampeonato{
                     camp.removerJogador();
                 break;
                 case 3:
+                    camp.iniciarCampeonato();
                 break;
                 case 4:
                 break;
