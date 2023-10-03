@@ -6,8 +6,8 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Campeonato {
-    private Scanner teclado = new Scanner(System.in);
-    private File arquivo = new File("agenda.dat");
+    Scanner teclado = new Scanner(System.in);
+    File arquivo = new File("agenda.dat");
     private Jogador[] jogadores = new Jogador[10];
     private int quantJog = 0, i;
 
@@ -18,10 +18,9 @@ public class Campeonato {
         nome = teclado.nextLine();
         System.out.println("Informe o tipo do jogador [1 -> Humano ou 2 -> Maquina]:");
         tipoJogador = teclado.nextInt();
-        teclado.nextLine();
         jogadores[quantJog] = new Jogador(nome, tipoJogador);
         quantJog++;
-        System.out.println("Jogador "+nome+" adicionado com sucesso!\n");
+        System.out.println("Jogador "+nome+" adicionado com sucesso!");
     }
 
     public void removerJogador(){
@@ -30,9 +29,8 @@ public class Campeonato {
         for(i = 1; i <= quantJog; i++){
             System.out.println(i+" -> "+jogadores[i - 1].getNome());
         }
-        System.out.print("Opcao: ");
         opcao = teclado.nextInt();
-        System.out.println("O jogador "+jogadores[opcao - 1].getNome()+" foi removido com sucesso!\n");
+        System.out.println("O jogador "+jogadores[opcao - 1].getNome()+" foi removido com sucesso!");
         for(i = opcao - 1; i < quantJog; i++){
             jogadores[i] = jogadores[i + 1];
         }
@@ -40,20 +38,13 @@ public class Campeonato {
     }
 
     public void iniciarCampeonato(){
-        for(int j = 0; j < 13; j++){    
+        for(int j = 0; j < 10; j++){    
             for(i = 0; i < quantJog; i++){
                 jogadores[i].jogarDados();
                 jogadores[i].escolherJogada();
+                
             }
         }
-    }
-
-    public void mostrarTabela(){
-        System.out.println("-- Cartela de Resultados --\n");
-
-        for(i=0; i<quantJog; i++)
-            System.out.printf("%15s", "    " + jogadores[i].getNome() + "(" + jogadores[i].getTipoJog() + ")");
-
     }
 
     public void gravarEmArquivo(){
