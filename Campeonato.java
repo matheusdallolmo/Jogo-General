@@ -6,8 +6,8 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Campeonato {
-    Scanner teclado = new Scanner(System.in);
-    File arquivo = new File("agenda.dat");
+    private Scanner teclado = new Scanner(System.in);
+    private File arquivo = new File("agenda.dat");
     private Jogador[] jogadores = new Jogador[10];
     private int quantJog = 0, i;
 

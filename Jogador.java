@@ -4,6 +4,7 @@ public class Jogador {
     private String nome = new String();
     private String tipoJogador;
     private JogoGeneral jogo = new JogoGeneral();
+    private Scanner sc = new Scanner(System.in);
 
     // Contrutor padrao para Jogador
     public Jogador(){
@@ -62,17 +63,15 @@ public class Jogador {
 
     // Funcao que permite que o jogador escolha qual jogada ele deseja usar
     public void escolherJogada(){
-        Scanner sc = new Scanner(System.in);
         int aux,  pontos;
         if(tipoJogador == "H"){// Separa o jogador humano da maquina por conta que o humano escolhe e a maquina nao
             System.out.println("\n-> "+nome+", para qual jogada deseja marcar [1 - 13]?");
-            System.out.println("1 2 3 4 5 6 7(T) 8(Q) 9(F) 10(S+) 11(S-) 12(G) 13(X)\n");
-            for(int i = 0; i < 13; i++){// For para imprimir todos os resultados que o jogador ja possui
+            System.out.printf("%s","1\t2\t3\t4\t5\t6\t7(T)\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");            for(int i = 0; i < 13; i++){// For para imprimir todos os resultados que o jogador ja possui
                 aux = jogo.getPontuacao(i);
                 if(aux >= 0)
-                    System.out.print(aux + "    ");
+                    System.out.printf("%s",aux+"\t");
                 else
-                    System.out.print("   -   ");
+                    System.out.printf("%s","-\t");
             }
             System.out.print("\nOpcao: ");
             
@@ -104,6 +103,7 @@ public class Jogador {
                 else
                     System.out.print("- ");
             }
-        };
+        }
     }
+    
 }

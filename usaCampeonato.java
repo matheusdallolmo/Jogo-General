@@ -28,10 +28,13 @@ public class usaCampeonato{
                     camp.iniciarCampeonato();
                 break;
                 case 4:
+                    camp.mostrarTabela();
                 break;
                 case 5:
+                    camp.gravarEmArquivo();
                 break;
                 case 6:
+                    camp.lerDoArquivo();
                 break;
                 default:
             }
