@@ -1,4 +1,6 @@
-public class JogoGeneral {
+import java.io.Serializable;
+
+public class JogoGeneral implements Serializable{
     private Dado[] dados = new Dado[5];
     private int[] jogadas = new int[13]; 
 
