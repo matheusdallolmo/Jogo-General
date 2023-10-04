@@ -56,7 +56,7 @@ public class Jogador implements Serializable{
         if(tipoJogador == "H")// Se o jogador for humano ele imprime uma mensagem
             System.out.println("Rolando dados para "+nome+" (H)");
         else// Se o jogador for uma maquina ele imprime outra mensagem
-            System.out.println("Rolando dados para"+nome+" (M)");
+            System.out.println("\nRolando dados para "+nome+" (M)");
         System.out.print("Valores obtidos: ");// Imprime os valores obtidos na rolagem
         jogo.rolarDados();
     }
@@ -71,6 +71,44 @@ public class Jogador implements Serializable{
 
     public int validaJogada(int i){
         return jogo.validarJogada(i);
+    }
+
+    // Funcao para escolher a jogada da maquina
+    public int jogadaMaquina(){
+        if ((jogo.getJogada(12) == -1) && (jogo.validarJogada(12) == 50))
+            return 12;
+        else if ((jogo.getJogada(11) == -1) && (jogo.validarJogada(11) == 40))
+            return 11;
+        else if ((jogo.getJogada(10) == -1) && (jogo.validarJogada(10) == 30))
+            return 10;
+        else if ((jogo.getJogada(9) == -1) && (jogo.validarJogada(9) == 25))
+            return 9;
+        else if ((jogo.getJogada(8) == -1) && (jogo.validarJogada(8) != 0))
+            return 8;
+        else if ((jogo.getJogada(7) == -1) && (jogo.validarJogada(7) != 0))
+            return 7;
+        else if ((jogo.getJogada(13) == -1) && (jogo.validarJogada(13) != 0))
+            return 13;
+        else if ((jogo.getJogada(6) == -1) && (jogo.validarJogada(6) != 0))
+            return 6;
+        else if ((jogo.getJogada(5) == -1) && (jogo.validarJogada(5) != 0))
+            return 5;
+        else if ((jogo.getJogada(4) == -1) && (jogo.validarJogada(4) != 0))
+            return 4;
+        else if ((jogo.getJogada(3) == -1) && (jogo.validarJogada(3) != 0))
+            return 3;
+        else if ((jogo.getJogada(2) == -1) && (jogo.validarJogada(2) != 0))
+            return 2;
+        else if ((jogo.getJogada(1) == -1) && (jogo.validarJogada(1) != 0))
+            return 1;
+        else{
+            for(int i=13; i>0; i--){
+                if(jogo.getJogada(i) == -1){
+                        return i;
+                }
+            }
+            return 0;
+        }
     }
 
     public void pontuaJogada(int jogada, int pontos){

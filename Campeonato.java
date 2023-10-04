@@ -3,6 +3,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
+
 import java.io.File;
 
 public class Campeonato {
@@ -12,16 +13,24 @@ public class Campeonato {
     private int quantJog = 0, i;
 
     public void incluirJogador(){
-        String nome;
-        int tipoJogador;
-        System.out.println("->Informe o nome do novo Jogador: ");
-        nome = teclado.nextLine();
-        System.out.println("Informe o tipo do jogador [1 -> Humano ou 2 -> Maquina]:");
-        tipoJogador = teclado.nextInt();
-        teclado.nextLine();
-        jogadores[quantJog] = new Jogador(nome, tipoJogador);
-        quantJog++;
-        System.out.println("Jogador "+nome+" adicionado com sucesso!\n");
+        if(quantJog != 10){
+            String nome;
+            char tipoJogador;
+            
+            System.out.println("->Informe o nome do novo Jogador: ");
+            nome = teclado.nextLine();
+            System.out.println("Informe o tipo do jogador [H -> Humano ou M -> Maquina]:");
+            tipoJogador = teclado.next().charAt(0);
+            while((tipoJogador != 'h') || (tipoJogador != 'm') || (tipoJogador != 'H') || (tipoJogador != 'M')){
+                System.out.println("Tipo de jogador invalido, digite a opcao correta: ");
+                tipoJogador = teclado.next().charAt(0);
+            }
+            teclado.nextLine();
+            jogadores[quantJog] = new Jogador(nome, tipoJogador);
+            quantJog++;
+            System.out.println("Jogador "+nome+" adicionado com sucesso!\n");
+        }else
+            System.out.println("Limite de jogadores alcancado! Inicie o campeonato.\n");
     }
 
     public void removerJogador(){
@@ -39,35 +48,6 @@ public class Campeonato {
         quantJog--;
     }
 
-/*// Funcao para escolher a jogada da maquina
-    public int jogadaMaquina(){
-        if ((jogo.getJogada(12) == -1) && (jogo.validarJogada(12) == 50))
-            return 50;
-        else if ((jogo.getJogada(11) == -1) && (jogo.validarJogada(11) == 40))
-            return 40;
-        else if ((jogo.getJogada(10) == -1) && (jogo.validarJogada(10) == 30))
-            return 30;
-        else if ((jogo.getJogada(9) == -1) && (jogo.validarJogada(9) == 25))
-            return 25;
-        else if ((jogo.getJogada(8) == -1) && (jogo.validarJogada(8) != 0))
-            return jogo.validarJogada(8);
-        else if ((jogo.getJogada(7) == -1) && (jogo.validarJogada(7) != 0))
-            return jogo.validarJogada(7);
-        else if ((jogo.getJogada(6) == -1) && (jogo.validarJogada(6) != 0))
-            return jogo.validarJogada(6);
-        else if ((jogo.getJogada(5) == -1) && (jogo.validarJogada(5) != 0))
-            return jogo.validarJogada(5);
-        else if ((jogo.getJogada(4) == -1) && (jogo.validarJogada(4) != 0))
-            return jogo.validarJogada(4);
-        else if ((jogo.getJogada(3) == -1) && (jogo.validarJogada(3) != 0))
-            return jogo.validarJogada(3);
-        else if ((jogo.getJogada(2) == -1) && (jogo.validarJogada(2) != 0))
-            return jogo.validarJogada(2);
-        else if ((jogo.getJogada(1) == -1) && (jogo.validarJogada(1) != 0))
-            return jogo.validarJogada(1);
-
-               
-    }*/
 
     public void iniciarCampeonato(){
         int aux, pontos;
@@ -100,21 +80,40 @@ public class Campeonato {
                     }
         
                     if(pontos == 0)
-                        System.out.println("Você zerou a jogada!!");
+                        System.out.println("Voce zerou a jogada!!\n");
                     else
-                        System.out.println("Você fez "+pontos+" na jogada "+escolha + "\n");
+                        System.out.println("Voce fez "+pontos+" na jogada "+escolha + "\n");
                         jogadores[i].pontuaJogada(escolha, pontos);
                 };
                 if(jogadores[i].getTipoJog() == "M"){// Funcao que calcula a melhor jogada para a maquina
-        
-                    System.out.println("Jogada escolhida por "+jogadores[i].getNome()+" (M)");
-                    for(int i = 0; i < 13; i++){// For para imprimir todos os resultados que o jogador ja possui
-                        aux = jogadores[i].getPontos(i);
+
+                    int escolhaMaq = jogadores[i].jogadaMaquina();
+                    /*if(escolhaMaq == -1){
+                        for(j=13; j>0; j--){
+                            if(jogadores[i].getJogada(j) == -1){
+                                escolhaMaq = j;
+                                break;
+                            }
+                        }
+                    }*/
+                    System.out.println("\nJogada escolhida por "+jogadores[i].getNome()+" (M) [1-13]: " + escolhaMaq);
+
+                    pontos = jogadores[i].validaJogada(escolhaMaq);
+                    if(pontos == 0)
+                        System.out.println("Maquina zerou a jogada!!\n");
+                    else
+                        System.out.println("Maquina fez "+pontos+" na jogada "+ escolhaMaq);
+                        jogadores[i].pontuaJogada(escolhaMaq, pontos);
+
+                    System.out.printf("%s","1\t2\t3\t4\t5\t6\t7(T)\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");            
+                    for(int k = 0; k < 13; k++){// For para imprimir todos os resultados que o jogador ja possui
+                        aux = jogadores[i].getPontos(k);
                         if(aux >= 0)
-                            System.out.print(aux );
+                            System.out.printf("%s",aux+"\t");
                         else
-                            System.out.print("- ");
+                            System.out.printf("%s","-\t");
                     }
+                    System.out.println();
                 }
             }
         }
@@ -127,7 +126,7 @@ public class Campeonato {
         System.out.printf("%s", "\t");
 
         for(i=0; i<quantJog; i++)
-            System.out.printf("%s", jogadores[i].getNome() + "(" + jogadores[i].getTipoJog() + ")\t");
+            System.out.printf("%10s", jogadores[i].getNome() + "(" + jogadores[i].getTipoJog() + ")\t");
 
         System.out.println();
 
@@ -150,17 +149,19 @@ public class Campeonato {
                 System.out.printf("%s",  i + "(X)\t");
 
             for(int j=0; j<quantJog; j++){
-                System.out.printf("%s",  jogadores[j].getJogada(i) + "\t\t");
+                System.out.printf("%10s",  jogadores[j].getJogada(i) + "\t");
             }
             System.out.println();
         }
-        
-        System.out.println("----------------------------");
-        System.out.print("Total\t" );
+        for(i=0; i<quantJog; i++)
+            System.out.print("-----------------");
+
+        System.out.print("\nTotal\t" );
 
         for(i=0; i<quantJog; i++){
-            System.out.print(jogadores[i].getTotal(i) + "\t");
+            System.out.printf("%10s", jogadores[i].getTotal(i) + "\t");
         }
+        System.out.println();
     }
 
     public void gravarEmArquivo(){
@@ -172,6 +173,8 @@ public class Campeonato {
             oos.flush();
             oos.close();
             fout.close();
+
+            System.out.println("Arquivo gravado com sucesso!");
         } catch (Exception ex) {
             System.err.println("erro: " + ex.toString());
         }
@@ -190,47 +193,16 @@ public class Campeonato {
             oin.close();
             fin.close();
 
-            // Uma forma de diferente do for para percorrer vetores
-            System.out.println("-- Cartela de Resultados --\n");
+            jogadores = jogadoresArq;
 
-            System.out.printf("%s", "\t");
-
-            for(i=0; i<quantJog; i++)
-                System.out.printf("%s", jogadoresArq[i].getNome() + "(" + jogadoresArq[i].getTipoJog() + ")\t");
-
-            System.out.println();
-
-            for(i=1; i<=13; i++){
-                if(i<=6)
-                    System.out.printf("%s",  i + "\t");
-                else if(i == 7)
-                    System.out.printf("%s",  i + "(T)\t");
-                else if(i == 8)
-                    System.out.printf("%s",  i + "(Q)\t");
-                else if(i == 9)
-                    System.out.printf("%s",  i + "(F)\t");
-                else if(i == 10)
-                    System.out.printf("%s",  i + "(S+)\t");
-                else if(i == 11)
-                    System.out.printf("%s",  i + "(S-)\t");
-                else if(i == 12)
-                    System.out.printf("%s",  i + "(G)\t");
-                else if(i == 13)
-                    System.out.printf("%s",  i + "(X)\t");
-
-                for(int j=0; j<quantJog; j++){
-                    System.out.printf("%s",  jogadoresArq[j].getJogada(i) + "\t\t");
-                }
-                System.out.println();
-            }
-            
-            System.out.println("----------------------------");
-            System.out.print("Total\t" );
-
-            for(i=0; i<quantJog; i++){
-                System.out.print(jogadoresArq[i].getTotal(i) + "\t");
+            quantJog = 0; i=0;
+            while(jogadores[i] != null){
+                quantJog++;
+                i++;
             }
         
+            System.out.println("Arquivo lido com sucesso!\n");
+
             } catch (Exception ex) {
                 System.err.println("erro: " + ex.toString());
             }
