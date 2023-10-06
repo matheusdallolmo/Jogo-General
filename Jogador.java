@@ -15,7 +15,7 @@ public class Jogador implements Serializable{
     public Jogador(String nome, int tipo){
         this.nome = nome;
         jogo = new JogoGeneral();
-        if(tipo == 1)
+        if(tipo == 'h' || tipo == 'H')
             tipoJogador = "H";
         else
             tipoJogador = "M";

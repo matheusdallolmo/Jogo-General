@@ -20,11 +20,11 @@ public class JogoGeneral implements Serializable{
         }
     }
     
-    public int getPontuacao(int jogada){
+    public int getPontuacao(int jogada){ //getter da pontuacao
         return jogadas[jogada];
     }
 
-    public int getJogada(int i){
+    public int getJogada(int i){ //geter da pontuacao na jogada, mas para funcoes especificas
         return jogadas[i-1];
     }
 
@@ -35,7 +35,8 @@ public class JogoGeneral implements Serializable{
 
         return soma;
     }
-    // Funcao que valida se a jogada e possivel e calcula os pontos marcados
+
+    // Funcao que valida se a jogada eh possivel e calcula os pontos marcados
     // Retorna 0 se a jogada nao for possivel ou os pontos marcados se ela for possivel
     public int validarJogada(int jogada){
         int i, quant = 0;
@@ -183,12 +184,10 @@ public class JogoGeneral implements Serializable{
             return quant;
         }
 
-        
-
         return -1;
     }
 
-    public void pontuarJogada(int jogada, int pontos){
+    public void pontuarJogada(int jogada, int pontos){ //Funcao para pontuarJogada
         jogadas[jogada - 1] = pontos;
     }
 }
