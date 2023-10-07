@@ -6,6 +6,7 @@ public class usaCampeonato{
         Scanner scanner = new Scanner(System.in);
         char opcao;
 
+        // Menu Interativo
         do{
             System.out.println("\n..:: Menu Interativo ::..");
             System.out.println("a -> Incluir Jogador");
@@ -19,6 +20,7 @@ public class usaCampeonato{
             System.out.println("Escolha uma opcao: ");
             opcao = scanner.next().charAt(0);
 
+            // Switch que roda a funcao escolhida atraves do menu interativo
             switch(opcao){
                 case 'a':
                     camp.incluirJogador();

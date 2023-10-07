@@ -4,6 +4,7 @@ public class JogoGeneral implements Serializable{
     private Dado[] dados = new Dado[5];
     private int[] jogadas = new int[13]; 
 
+    // Contrutor padrao
     public JogoGeneral(){
         for(int i = 0; i < 5; i++)
             dados[i] = new Dado();
@@ -11,6 +12,7 @@ public class JogoGeneral implements Serializable{
             jogadas[i] = -1;   
     }
 
+    // Funcao para rolar os dados
     public void rolarDados(){
         for(int i=0; i<5; i++){
             dados[i].roll();
@@ -19,15 +21,24 @@ public class JogoGeneral implements Serializable{
                 System.out.print("-");
         }
     }
+
+    // Funcao para zerar a pontuacao do jogador
+    public void zerarPontuacao(){
+        for(int i = 0; i < 13; i++)
+            jogadas[i] = -1;   
+    }
     
-    public int getPontuacao(int jogada){ //getter da pontuacao
+    //Funcao que retorna a pontuacao em determinada jogada
+    public int getPontuacao(int jogada){ 
         return jogadas[jogada];
     }
 
-    public int getJogada(int i){ //geter da pontuacao na jogada, mas para funcoes especificas
+    //Funcao que retorna a pontuacao na jogada, mas para funcoes especificas
+    public int getJogada(int i){ 
         return jogadas[i-1];
     }
 
+    // Funcao que retorna o total de pontos feitos pelo jogador
     public int getTotal(int i){
         int soma = 0;
         for(i=0; i<13; i++)
@@ -187,7 +198,8 @@ public class JogoGeneral implements Serializable{
         return -1;
     }
 
-    public void pontuarJogada(int jogada, int pontos){ //Funcao para pontuarJogada
+    // Funcao para atualizar a pontuacao do jogador
+    public void pontuarJogada(int jogada, int pontos){
         jogadas[jogada - 1] = pontos;
     }
 }

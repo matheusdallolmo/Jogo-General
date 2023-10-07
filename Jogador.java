@@ -36,6 +36,7 @@ public class Jogador implements Serializable{
         return jogo.getJogada(i);
     }
 
+    // Funcao que retorna a pontuacao total do jogador
     public int getTotal(int i){
         return jogo.getTotal(i);
     }
@@ -46,29 +47,41 @@ public class Jogador implements Serializable{
         this.tipoJogador = tipoJogador;
     }
 
+    // Funcao para imprimir nome e tipo do jogador
     public void imprimirDados(){
         System.out.println("Nome: "+this.nome);
         System.out.println("Tipo do Jogador: "+tipoJogador);
     }
 
+    // Funcao para zerar os pontos do jogador
+    public void zerarPontos(){
+        jogo.zerarPontuacao();
+    }
+
     // Funcao que rola os dados para o jogador
     public void jogarDados(){
-        if(tipoJogador == "H")// Se o jogador for humano ele imprime uma mensagem
+        // Se o jogador for humano ele imprime uma mensagem
+        if(tipoJogador == "H")
             System.out.println("Rolando dados para "+nome+" (H)");
-        else// Se o jogador for uma maquina ele imprime outra mensagem
+        // Se o jogador for uma maquina ele imprime outra mensagem
+        else
             System.out.println("\nRolando dados para "+nome+" (M)");
-        System.out.print("Valores obtidos: ");// Imprime os valores obtidos na rolagem
+        // Imprime os valores obtidos na rolagem
+        System.out.print("Valores obtidos: ");
         jogo.rolarDados();
     }
 
+    // Funcao que retorna os pontos feitos na jogada escolhida
     public int getPontos(int i){
         return jogo.getPontuacao(i);
     }
 
+    // Funcao que retorna a pontuacao na jogada
     public int getJogadas(int i){
         return jogo.getJogada(i);
     }
 
+    // Funcao que valida a jogada
     public int validaJogada(int i){
         return jogo.validarJogada(i);
     }
@@ -111,6 +124,7 @@ public class Jogador implements Serializable{
         }
     }
 
+    // Funcao para atualizar a pontuacao do jogador
     public void pontuaJogada(int jogada, int pontos){
         jogo.pontuarJogada(jogada, pontos);
     }
