@@ -72,11 +72,6 @@ public class Campeonato {
     public void iniciarCampeonato(){
         int aux, pontos;
 
-        // Funcao que zera os pontos para mais rodadas poderem ser realizadas
-        for(int i = 0; i<quantJog; i++){
-            jogadores[i].zerarPontos();
-        }
-
         //Imprime uma mensagem avisando a necessidade de pelo menos um jogador para jogar general
         if(jogadores[i] == null) 
             System.out.println("Eh necessario pelo menos 1 jogador para que o campeonato se inicie. Inclua um jogador!");

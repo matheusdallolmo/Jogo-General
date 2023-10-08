@@ -21,12 +21,6 @@ public class JogoGeneral implements Serializable{
                 System.out.print("-");
         }
     }
-
-    // Funcao para zerar a pontuacao do jogador
-    public void zerarPontuacao(){
-        for(int i = 0; i < 13; i++)
-            jogadas[i] = -1;   
-    }
     
     //Funcao que retorna a pontuacao em determinada jogada
     public int getPontuacao(int jogada){ 

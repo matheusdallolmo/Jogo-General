@@ -53,11 +53,6 @@ public class Jogador implements Serializable{
         System.out.println("Tipo do Jogador: "+tipoJogador);
     }
 
-    // Funcao para zerar os pontos do jogador
-    public void zerarPontos(){
-        jogo.zerarPontuacao();
-    }
-
     // Funcao que rola os dados para o jogador
     public void jogarDados(){
         // Se o jogador for humano ele imprime uma mensagem
