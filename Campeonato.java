@@ -61,10 +61,14 @@ public class Campeonato {
         System.out.println("O jogador "+jogadores[opcao - 1].getNome()+" foi removido com sucesso!\n");
         //For para remover o jogador
         for(i = opcao - 1; i < quantJog; i++){ 
-            jogadores[i] = jogadores[i + 1];
+            if(i == 9)
+                jogadores[i] = null;
+            else
+                jogadores[i] = jogadores[i + 1];
         }
         // Ajuste do tamanho do vetor de jogadores
         quantJog--; 
+        teclado.nextLine(); //Limpando buffer para que apos a remocao seja possivel a implementacao de outro jogador sem erros
     }
 
 
@@ -73,7 +77,7 @@ public class Campeonato {
         int aux, pontos;
 
         //Imprime uma mensagem avisando a necessidade de pelo menos um jogador para jogar general
-        if(jogadores[i] == null) 
+        if(jogadores[0] == null) 
             System.out.println("Eh necessario pelo menos 1 jogador para que o campeonato se inicie. Inclua um jogador!");
 
         // For criado para zerar as jogadas e o total, tornando possivel iniciar um novo campeonato varias vezes ate que escolha a opcao de sair

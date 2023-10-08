@@ -109,7 +109,7 @@ public class Jogador implements Serializable{
             return 2;
         else if ((jogo.getJogada(1) == -1) && (jogo.validarJogada(1) != 0))
             return 1;
-        else{
+        else{  //Caso nao seja possivel pontuar em nenhuma das jogadas, comeca zerando de tras pra frente as jogadas
             for(int i=13; i>0; i--){
                 if(jogo.getJogada(i) == -1){
                         return i;
