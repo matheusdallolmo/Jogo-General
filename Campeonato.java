@@ -237,13 +237,14 @@ public class Campeonato {
             * coercao de tipos
             */
 
-             jogadores = (Jogador[]) oin.readObject();
+            Jogador[] jogadoresArq = (Jogador[]) oin.readObject();
             oin.close();
             fin.close();
 
+            jogadores = jogadoresArq;
 
             // atulizar a quantidade de jogadores que foram lidos
-            quantJog = 0; i=0;
+            quantJog = 0;
             for(Jogador jog : jogadores){
                 if (jog != null)
                     quantJog++;
