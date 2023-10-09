@@ -2,23 +2,23 @@ import java.io.Serializable;
 
 public class Jogador implements Serializable{
     private String nome = new String();
-    private String tipoJogador;
+    private char tipoJogador;
     private JogoGeneral jogo = new JogoGeneral();
 
     // Contrutor padrao para Jogador
     public Jogador(){
-        nome = "sem nome";
-        tipoJogador = " ";
+        this.nome = "sem nome";
+        this.tipoJogador = '-';
     }
 
     // Construtor carregado para jogador
-    public Jogador(String nome, int tipo){
+    public Jogador(String nome, char tipo){
         this.nome = nome;
         jogo = new JogoGeneral();
-        if(tipo == 'h' || tipo == 'H')
-            tipoJogador = "H";
+        if (tipo == 'H' || tipo == 'h')
+            this.tipoJogador = 'H';
         else
-            tipoJogador = "M";
+            this.tipoJogador = 'M';
     }
 
     // Funcao que retorna o nome do Jogador
@@ -27,7 +27,7 @@ public class Jogador implements Serializable{
     }
 
     // Funcao que retorna o tipo do jogador (Humano ou maquina)
-    public String getTipoJog(){
+    public char getTipoJog(){
         return tipoJogador;
     }
 
@@ -42,7 +42,7 @@ public class Jogador implements Serializable{
     }
 
     // Funcao que atualiza as informacoes do jogador
-    public void atualizaJogador(String nome, String tipoJogador){
+    public void atualizaJogador(String nome, char tipoJogador){
         this.nome = nome;
         this.tipoJogador = tipoJogador;
     }
@@ -56,7 +56,7 @@ public class Jogador implements Serializable{
     // Funcao que rola os dados para o jogador
     public void jogarDados(){
         // Se o jogador for humano ele imprime uma mensagem
-        if(tipoJogador == "H")
+        if(tipoJogador == 'H')
             System.out.println("Rolando dados para "+nome+" (H)");
         // Se o jogador for uma maquina ele imprime outra mensagem
         else

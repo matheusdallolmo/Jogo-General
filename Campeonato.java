@@ -76,9 +76,7 @@ public class Campeonato {
     public void iniciarCampeonato(){
         int aux, pontos;
 
-        //Imprime uma mensagem avisando a necessidade de pelo menos um jogador para jogar general
-        if(jogadores[0] == null) 
-            System.out.println("Eh necessario pelo menos 1 jogador para que o campeonato se inicie. Inclua um jogador!");
+        
 
         // For criado para zerar as jogadas e o total, tornando possivel iniciar um novo campeonato varias vezes ate que escolha a opcao de sair
         for(int j=1; j<=13; j++){ 
@@ -87,79 +85,85 @@ public class Campeonato {
             } 
         }
 
-        for(int j = 0; j < 13; j++){  //For das jogadas
-            for(i = 0; i < quantJog; i++){  //For dos jogadores
-                jogadores[i].jogarDados();
-                
-                if(jogadores[i].getTipoJog() == "H"){// Separa o jogador humano da maquina por conta que o humano escolhe e a maquina nao
-                    int escolha;
-                    System.out.println("\n-> "+jogadores[i].getNome()+", para qual jogada deseja marcar [1 - 13]?");
-                    System.out.printf("%s","1\t2\t3\t4\t5\t6\t7(T)\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");  
-                    // For para imprimir todos os resultados que o jogador ja possui          
-                    for(int k = 0; k < 13; k++){
-                        aux = jogadores[i].getPontos(k);
-                        if(aux >= 0)
-                            System.out.printf("%s",aux+"\t");
-                        else
-                            System.out.printf("%s","-\t");
-                    }
-                    do{
-                        System.out.print("\nOpcao: ");        
-                        escolha = teclado.nextInt();
-                        if(escolha<1 || escolha>13)
-                            System.out.println("Escolha incorreta, selecione uma escolha valida: [1-13]");
-
-                    }while(escolha < 1 || escolha > 13); // Do while para que a pessoa selecione apenas jogadas validas, entre 1 e 13
+        //Imprime uma mensagem avisando a necessidade de pelo menos um jogador para jogar general
+        if(jogadores[0] == null) 
+            System.out.println("Eh necessario pelo menos 1 jogador para que o campeonato se inicie. Inclua um jogador!");
+        else{
+            for(int j = 0; j < 13; j++){  //For das jogadas
+                for(i = 0; i < quantJog; i++){  //For dos jogadores
+                    jogadores[i].jogarDados();
                     
-                    //If else para validar a jogada, sendo necessario a entrada de escolha ser valida, ou seja, nao ter sido selecionada anteriormente
-                    if(jogadores[i].getJogadas(escolha) == -1) 
-                        pontos = jogadores[i].validaJogada(escolha);
-                    else{
-                        while(jogadores[i].getJogadas(escolha) != -1){
-                            System.out.println("Jogada invalida, jogue novamente!");
-        
-                            escolha = teclado.nextInt();
+                    if(jogadores[i].getTipoJog() == 'H'){// Separa o jogador humano da maquina por conta que o humano escolhe e a maquina nao
+                        int escolha = 0;
+                        System.out.println("\n-> "+jogadores[i].getNome()+", para qual jogada deseja marcar [1 - 13]?");
+                        System.out.printf("%s","1\t2\t3\t4\t5\t6\t7(T)\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n");  
+                        // For para imprimir todos os resultados que o jogador ja possui          
+                        for(int k = 0; k < 13; k++){
+                            aux = jogadores[i].getPontos(k);
+                            if(aux >= 0)
+                                System.out.printf("%s",aux+"\t");
+                            else
+                                System.out.printf("%s","-\t");
                         }
-                        pontos = jogadores[i].validaJogada(escolha);
-                    }
-        
-                    // Mensagem para informar que a rodada foi zerada
-                    if(pontos == 0)
-                        System.out.println("Voce zerou a jogada!!\n");
-                    // Mensagem que informa a quantidade de pontos feitos na rodada
-                    else
-                        System.out.println("Voce fez "+pontos+" na jogada "+escolha + "\n");
-                        jogadores[i].pontuaJogada(escolha, pontos);
-                };
-                //Separando jogador humano de jogador maquina
-                if(jogadores[i].getTipoJog() == "M"){
+                        do{
+                            System.out.print("\nOpcao: ");        
+                            escolha = teclado.nextInt();
+                            if(escolha<1 || escolha>13)
+                                System.out.println("Escolha incorreta, selecione uma escolha valida: [1-13]");
 
-                    // Funcao que calcula a melhor jogada para a maquina(jogadaMaquina)
-                    int escolhaMaq = jogadores[i].jogadaMaquina(); 
-                    System.out.println("\nJogada escolhida por "+jogadores[i].getNome()+" (M) [1-13]: " + escolhaMaq);
-
-                    pontos = jogadores[i].validaJogada(escolhaMaq);
-                    // Mensagem que informa que a maquina zerou a jogada
-                    if(pontos == 0)
-                        System.out.println("Maquina zerou a jogada!!\n");
-                    // Mensagem que informa quantos pontos a maquina marcou na rodada
-                    else
-                        System.out.println("Maquina fez "+pontos+" na jogada "+ escolhaMaq);
-                        jogadores[i].pontuaJogada(escolhaMaq, pontos);
-
-                    System.out.printf("%s","1\t2\t3\t4\t5\t6\t7(T)\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n"); 
-                    // For para imprimir todos os resultados que o jogador ja possui           
-                    for(int k = 0; k < 13; k++){                        
-                        aux = jogadores[i].getPontos(k);
-                        if(aux >= 0)
-                            System.out.printf("%s",aux+"\t");
+                        }while(escolha < 1 || escolha > 13); // Do while para que a pessoa selecione apenas jogadas validas, entre 1 e 13
+                        
+                        //If else para validar a jogada, sendo necessario a entrada de escolha ser valida, ou seja, nao ter sido selecionada anteriormente
+                        if(jogadores[i].getJogadas(escolha) == -1) 
+                            pontos = jogadores[i].validaJogada(escolha);
+                        else{
+                            while(jogadores[i].getJogadas(escolha) != -1){
+                                System.out.println("Jogada invalida, jogue novamente!");
+            
+                                escolha = teclado.nextInt();
+                            }
+                            pontos = jogadores[i].validaJogada(escolha);
+                        }
+            
+                        // Mensagem para informar que a rodada foi zerada
+                        if(pontos == 0)
+                            System.out.println("Voce zerou a jogada!!\n");
+                        // Mensagem que informa a quantidade de pontos feitos na rodada
                         else
-                            System.out.printf("%s","-\t");
+                            System.out.println("Voce fez "+pontos+" na jogada "+escolha + "\n");
+                            jogadores[i].pontuaJogada(escolha, pontos);
                     }
-                    System.out.println();
+                    //Separando jogador humano de jogador maquina
+                    else if(jogadores[i].getTipoJog() == 'M'){
+
+                        // Funcao que calcula a melhor jogada para a maquina(jogadaMaquina)
+                        int escolhaMaq = jogadores[i].jogadaMaquina(); 
+                        System.out.println("\nJogada escolhida por "+jogadores[i].getNome()+" (M) [1-13]: " + escolhaMaq);
+
+                        pontos = jogadores[i].validaJogada(escolhaMaq);
+                        // Mensagem que informa que a maquina zerou a jogada
+                        if(pontos == 0)
+                            System.out.println("Maquina zerou a jogada!!\n");
+                        // Mensagem que informa quantos pontos a maquina marcou na rodada
+                        else
+                            System.out.println("Maquina fez "+pontos+" na jogada "+ escolhaMaq);
+                            jogadores[i].pontuaJogada(escolhaMaq, pontos);
+
+                        System.out.printf("%s","1\t2\t3\t4\t5\t6\t7(T)\t8(Q)\t9(F)\t10(S+)\t11(S-)\t12(G)\t13(X)\n"); 
+                        // For para imprimir todos os resultados que o jogador ja possui           
+                        for(int k = 0; k < 13; k++){                        
+                            aux = jogadores[i].getPontos(k);
+                            if(aux >= 0)
+                                System.out.printf("%s",aux+"\t");
+                            else
+                                System.out.printf("%s","-\t");
+                        }
+                        System.out.println();
+                    }
                 }
             }
         }
+        
     }
 
    
