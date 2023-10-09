@@ -84,7 +84,6 @@ public class Campeonato {
         for(int j=1; j<=13; j++){ 
            for(i=0; i<quantJog; i++){
                 jogadores[i].pontuaJogada(j, -1);
-                jogadores[i].getTotal(j-1);
             } 
         }
 
@@ -238,17 +237,16 @@ public class Campeonato {
             * coercao de tipos
             */
 
-            Jogador[] jogadoresArq = (Jogador[]) oin.readObject();
+             jogadores = (Jogador[]) oin.readObject();
             oin.close();
             fin.close();
 
-            jogadores = jogadoresArq;
 
             // atulizar a quantidade de jogadores que foram lidos
             quantJog = 0; i=0;
-            while(jogadores[i] != null){
-                quantJog++;
-                i++;
+            for(Jogador jog : jogadores){
+                if (jog != null)
+                    quantJog++;
             }
         
             // Informar que o arquivo foi lido com sucesso
