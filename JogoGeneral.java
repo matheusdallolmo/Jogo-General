@@ -41,6 +41,7 @@ public class JogoGeneral implements Serializable{
         return soma;
     }
 
+
     // Funcao que valida se a jogada eh possivel e calcula os pontos marcados
     // Retorna 0 se a jogada nao for possivel ou os pontos marcados se ela for possivel
     public int validarJogada(int jogada){

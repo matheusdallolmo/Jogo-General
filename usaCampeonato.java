@@ -51,4 +51,3 @@ public class usaCampeonato{
         scanner.close();
     }
 }
-

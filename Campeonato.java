@@ -51,7 +51,7 @@ public class Campeonato {
             System.out.println(i+" -> "+jogadores[i - 1].getNome());
         }
         do{
-            System.out.print("Opcao: ");
+            System.out.print("Indique o numero do jogador a ser removido: ");
             opcao = teclado.nextInt();
             if(opcao < 1 || opcao > quantJog)
                 System.out.println("Opcao incorreta, selecione uma opcao de jogador valido para remover!");
